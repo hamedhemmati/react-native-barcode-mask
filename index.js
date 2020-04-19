@@ -67,6 +67,11 @@ class BarcodeMask extends React.Component {
       top: new Animated.Value(10),
       maskCenterViewHeight: 0,
     };
+    this.transformStyle = {
+      transform: [{
+        translateY: this.state.top,
+      }]
+    }
   }
 
   componentDidMount() {
@@ -97,10 +102,12 @@ class BarcodeMask extends React.Component {
         Animated.timing(this.state.top, {
           toValue: this.state.maskCenterViewHeight - 10,
           duration: this.props.lineAnimationDuration,
+          useNativeDriver: true,
         }),
         Animated.timing(this.state.top, {
           toValue: 10,
           duration: this.props.lineAnimationDuration,
+          useNativeDriver: true,
         })
       ])
     );
@@ -176,8 +183,9 @@ class BarcodeMask extends React.Component {
                 {
                   backgroundColor: this.props.animatedLineColor,
                   height: this.props.animatedLineHeight,
-                  top: this.state.top,
+                  top: -5,
                 },
+              this.transformStyle
               ]}
             />
           )}
